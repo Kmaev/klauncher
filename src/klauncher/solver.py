@@ -38,7 +38,7 @@ class launcherIndex(object):
 
         return project_data
 
-    def projectApplications(self, project):
+    def getProjectApplications(self, project):
         project_data = self.openCurrentProjectData(project)
 
         tools = []
@@ -46,7 +46,7 @@ class launcherIndex(object):
             tools.append(self.ecosystem.get_tool(app))
         return tools
 
-    def getToolsList(self, project_data, app):
+    def getProjectTools(self, project_data, app):
         tools = []
         for regex, values in project_data['tools'].items():
             if re.match(regex, app):
@@ -54,13 +54,29 @@ class launcherIndex(object):
         tools.append(app)
         return tools
 
-    def applicationExecutables(self, tool):
-        return self.application_config[tool.tool]['executables']
+    def getApplications(self, tool):
+        return self.application_config[tool.tool]
 
-    def launchApplication(self, tools, executable):
+    def getApplicationData(self, tool, executable):
+        return self.application_config[tool.tool][executable]
+
+    def launchApplication(self, tools, executable, extra_envs=None):
 
         env = self.ecosystem.get_environment(*tools)
 
         with env:
-            executable = os.path.expandvars(executable)
-            subprocess.call(executable)
+            env = dict(os.environ.copy())
+
+            if extra_envs:
+                env.update(extra_envs)
+            if isinstance(executable, list) is True:
+                _executable = []
+                for i in executable:
+                    expanded = os.path.expandvars(i)
+                    _executable.append(expanded)
+                executable = _executable
+
+            else:
+                executable = os.path.expandvars(executable)
+
+            subprocess.Popen(executable, env=env)
