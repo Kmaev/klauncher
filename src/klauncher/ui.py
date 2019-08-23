@@ -13,7 +13,8 @@ class LauncherDialog(QtWidgets.QDialog):
         super(LauncherDialog, self).__init__()
 
         self.setWindowTitle('kLauncher')
-        self.setWindowIcon(QtGui.QIcon(r"E:\pipeline\modules\klauncher\1.0.0\resources\images\klauncher_logo\app_logo.png"))
+        style_folder = os.environ.get("STYLE_KLAUNCHER")
+        self.setWindowIcon(QtGui.QIcon(os.path.join(style_folder, "images/klauncher_logo/app_logo.png")))
         self.resize(455, 400)
 
         # Central layout
@@ -65,7 +66,7 @@ class LauncherDialog(QtWidgets.QDialog):
         self.shot_combo.currentIndexChanged.connect(
             self.onShotComboChanged)
 
-        with open(r'E:\pipeline\modules\klauncher\1.0.0\resources\style.css', 'r') as f:
+        with open(os.path.join(style_folder, "style.css"), 'r') as f:
             style = f.read()
         self.setStyleSheet(style)
 
@@ -191,11 +192,12 @@ class Application(QtWidgets.QFrame):
 
 
     def onLoad(self):
-
+        assets = os.environ.get("ASSETS")
         extra = {
             'PROJECT': self.project,
             'SEQUENCE': self.sequence,
             'SHOT': self.shot,
+            'ASSETS': assets
         }
         self.launcher_index.launchApplication(tools=self.tools,
                                               executable=self.executable,
