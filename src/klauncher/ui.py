@@ -193,11 +193,13 @@ class Application(QtWidgets.QFrame):
 
     def onLoad(self):
         assets = os.environ.get("ASSETS")
+        department = os.environ.get("DEPARTMENT")
         extra = {
             'PROJECT': self.project,
             'SEQUENCE': self.sequence,
             'SHOT': self.shot,
-            'ASSETS': assets
+            'ASSETS': assets,
+            'DEPARTMENT': department
         }
         self.launcher_index.launchApplication(tools=self.tools,
                                               executable=self.executable,
