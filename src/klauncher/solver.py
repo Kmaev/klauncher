@@ -79,4 +79,5 @@ class launcherIndex(object):
             else:
                 executable = os.path.expandvars(executable)
 
+            env = {str(x): str(y) for x, y in env.items()}
             subprocess.Popen(executable, env=env)

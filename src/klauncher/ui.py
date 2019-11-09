@@ -8,7 +8,7 @@ from klauncher import solver
 from klauncher import res
 
 
-class LauncherDialog(QtWidgets.QDialog):
+class LauncherDialog(QtWidgets.QMainWindow):
     def __init__(self):
         super(LauncherDialog, self).__init__()
 
@@ -18,9 +18,9 @@ class LauncherDialog(QtWidgets.QDialog):
         self.resize(455, 400)
 
         # Central layout
-        self.central_layout = QtWidgets.QVBoxLayout()
-
-        self.setLayout(self.central_layout)
+        self.central_widget = QtWidgets.QWidget()
+        self.central_layout = QtWidgets.QVBoxLayout(self.central_widget)
+        self.setCentralWidget(self.central_widget)
 
         self.project_combo = QtWidgets.QComboBox()
         self.sequence_combo = QtWidgets.QComboBox()
@@ -49,7 +49,7 @@ class LauncherDialog(QtWidgets.QDialog):
 
         self.launcher_index = solver.launcherIndex()
 
-        for i in self.launcher_index.projects():
+        for i in sorted(self.launcher_index.projects()):
             self.project_combo.addItem(i, i)
 
         self.project_data = self.launcher_index.openCurrentProjectData(
@@ -80,7 +80,7 @@ class LauncherDialog(QtWidgets.QDialog):
         self.sequence_combo.clear()
 
         seq = self.launcher_index.index[self.current_project]["sequences"]
-        for i in seq:
+        for i in sorted(seq):
             self.sequence_combo.addItem(i, i)
 
         self.sequence_combo.blockSignals(False)
@@ -96,7 +96,7 @@ class LauncherDialog(QtWidgets.QDialog):
         project = self.launcher_index.index[self.current_project]
         sequence = project["sequences"][self.current_sequence]
 
-        for i in sequence["shots"]:
+        for i in sorted(sequence["shots"]):
             self.shot_combo.addItem(i, i)
 
         self.onShotComboChanged(self.shot_combo.currentIndex())

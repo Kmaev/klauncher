@@ -44,8 +44,8 @@ QScrollArea {
 }
 
 
-QDialog,
-QDialog QScrollArea QWidget {
+QMainWindow,
+QMainWindow QScrollArea QWidget {
     background-color: #1b1b1b;
     border: none;
 }
