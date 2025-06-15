@@ -1,0 +1,107 @@
+* {
+    font-family: "Calibri Regular";
+}
+
+QComboBox {
+    width: 90px;
+    height: 20px;
+    background-color: #323232;
+    color: white;
+    border: 0px solid #32636c;
+    border-radius: 1px;
+    font: 13px;
+
+}
+
+QComboBox QAbstractItemView {
+    border: 0px solid #7e7e7e;
+    background-color: #323232;
+    selection-background-color: #212121;
+    outline: 0;
+    color: #c6c6c6;
+    font: 13px;
+}
+
+QComboBox::drop-down  {
+    background-color: #323232;
+    border-left-width: 1px;
+    border-left-color: #1b1b1b;
+    border-left-style: solid;
+    border-top-right-radius: 1px;
+    border-bottom-right-radius: 1px;
+
+}
+
+QComboBox::down-arrow {
+    width: 10px;
+    height: 10px;
+    image: url(:/icons/angle-down);
+}
+
+QScrollArea {
+    border: none;
+    background-color: #1b1b1b;
+}
+
+
+QMainWindow,
+QMainWindow QScrollArea QWidget {
+    background-color: #1b1b1b;
+    border: none;
+}
+
+QToolButton {
+    border: 0px;
+    border-radius: 0px;
+    background-color: #3a3a3a;
+
+}
+QLabel {
+    color: white;
+    font: 13px;
+}
+
+
+QScrollBar::vertical {
+    background-color: #1b1b1b;
+    padding: 1px;
+    border: none;
+    width: 12px;
+}
+
+QScrollBar::horizontal {
+    background-color: #1b1b1b;
+    padding: 1px;
+    border: none;
+    height: 12px;
+}
+
+QScrollBar::handle:vertical,
+QScrollBar::handle:horizontal {
+
+    background-color: #3a3a3a;
+    border-radius: 4px;
+    border: none;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    border: none;
+    border-radius: 2px;
+    background-color: transparent;
+    height: 10px;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    border: none;
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical,
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background-color: #1b1b1b;
+}
